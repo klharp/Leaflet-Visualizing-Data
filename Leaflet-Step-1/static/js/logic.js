@@ -52,16 +52,16 @@ d3.json(queryUrl).then(function (data) {
         }).bindPopup("<h3>" + features[i].properties.place +
             "</h3><hr><p>" + new Date(features[i].properties.time) +
             "<br>" + '[lat: ' + coordinates[1] + ", lng: " + coordinates[0] + ", depth: " + coordinates[2] + "]" + "</p>").addTo(myMap);
-    };
+    }
 
     // Colors for legend
-    function getColor2(legendColor) {
-        return legendColor === "<5" ? "#b3e5fc" :
-        legendColor === "5-10" ? "#4fc3f7" :
-        legendColor === "10-15" ? "#03a9f4" :
-        legendColor === "15-20" ? "0288d1" :
-        legendColor === "20-25" ? "01579b" :
-        legendColor === "25+" ? "#023762" : "023762";
+    function getColor2(colors) {
+        return colors === "<5" ? "#b3e5fc" :
+        colors === "5-10" ? "#4fc3f7" :
+        colors === "10-15" ? "#03a9f4" :
+        colors === "15-20" ? "#0288d1" :
+        colors === "20-25" ? "#01579b" :
+        colors === "25+" ? "#023762" : "#023762";
     }
 
     // Create legend object
@@ -73,22 +73,25 @@ d3.json(queryUrl).then(function (data) {
     legend.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
         var depth = ["<5", "5-10", "10-15", "15-20", "20-25", "25+"];
+        var colors = ["#b3e5fc", "#4fc3f7", "#03a9f4", "0288d1", "01579b", "#023762","023762"];
+
         var labels = ["<b>Depth (m)</b>"];
 
+        console.log(colors);
         console.log(depth);
+        console.log(labels);
 
         // loop through magnitude intervals and generate a label with a colored square 
         for (var i = 0; i < depth.length; i++) {
             div.innerHTML +=
                 labels.push(
-                    '<i style="background:' + getColor(depth[i] + 1) + '"></i> ' +
-                    (depth[i] ? depth[i] : '+'));
+                    '<i style="background:' + getColor2(depth[i]) + '"></i> ' + (depth[i] ? depth[i] : '+'));
         }
 
         div.innerHTML = labels.join('<br>');
         return div;
-    };
+    }
 
-    // Add legend to map
+    //Add legend to map
     legend.addTo(myMap);
 });

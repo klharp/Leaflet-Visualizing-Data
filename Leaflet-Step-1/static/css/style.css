@@ -20,12 +20,13 @@ html {
   line-height: 24px;
   color: #555;
 }
+
 .legend h4 {
   text-align: center;
   font-size: 16px;
   margin: 2px 12px 8px;
   color: #777;
-}
+} 
 
 .legend span {
   position: relative;
