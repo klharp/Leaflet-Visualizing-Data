@@ -24,12 +24,12 @@ d3.json(queryUrl).then(function (data) {
 
     // Function to color cicles according to depth
     function getColor(colors) {
-        return colors >= 25 ? "#3a3c66" :
-        colors >= 20 ? "#505288" :
-        colors >= 15 ? "#6465a9" :
-        colors >= 10 ? "#8284ba" :
-        colors >= 5 ? "#a0a2cc" :
-        colors >= 1 ? "#c1c2dc" : "#c1c2dc";
+        return colors >= 25 ? "#ff0a0a" :
+        colors >= 20 ? "#fd8a14" :
+        colors >= 15 ? "#f2ce02" :
+        colors >= 10 ? "#ebff0a" :
+        colors >= 5 ? "#85e62c" :
+        colors >= 1 ? "#209c05" : "#209c05";
     }
 
     // Loop through data and grab the features data
@@ -56,12 +56,12 @@ d3.json(queryUrl).then(function (data) {
 
     // Colors for legend
     function getColor2(colors) {
-        return colors === "<5" ? "#c1c2dc" :
-        colors === "5-10" ? "#a0a2cc" :
-        colors === "10-15" ? "#8284ba" :
-        colors === "15-20" ? "#6465a9" :
-        colors === "20-25" ? "#505288" :
-        colors === "25+" ? "#3a3c66" : "#3a3c66";
+        return colors === "<5" ? "#209c05" :
+        colors === "5-10" ? "#85e62c" :
+        colors === "10-15" ? "#ebff0a" :
+        colors === "15-20" ? "#f2ce02" :
+        colors === "20-25" ? "#fd8a14" :
+        colors === "25+" ? "#ff0a0a" : "#ff0a0a";
     }
 
     // Create legend object
@@ -73,7 +73,7 @@ d3.json(queryUrl).then(function (data) {
     legend.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
         var depth = ["<5", "5-10", "10-15", "15-20", "20-25", "25+"];
-        var colors = ["#c1c2dc", "#a0a2cc", "#8284ba", "6465a9", "505288", "#3a3c66","3a3c66"];
+        var colors = ["#209c05", "#85e62c", "#ebff0a", "f2ce02", "fd8a14", "#ff0a0a","ff0a0a"];
 
         var labels = ["<b>Depth (m)</b>"];
 
