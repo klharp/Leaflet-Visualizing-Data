@@ -22,9 +22,10 @@ var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_mo
 // Perform a GET request to the query URL
 d3.json(queryUrl).then(function (data) {
 
-    // Function to color cicles according to magnitudes
+    // Function to color cicles according to depth
     function getColor(colors) {
-        return colors >= 20 ? "#01579b" :
+        return colors >= 25 ? "#023762" :
+        colors >= 20 ? "#01579b" :
         colors >= 15 ? "#0288d1" :
         colors >= 10 ? "#03a9f4" :
         colors >= 5 ? "#4fc3f7" :
@@ -50,24 +51,44 @@ d3.json(queryUrl).then(function (data) {
             radius: magnitudes * 10000
         }).bindPopup("<h3>" + features[i].properties.place +
             "</h3><hr><p>" + new Date(features[i].properties.time) +
-            '<br>' + '[lat: ' + coordinates[1] + ', lng: ' + coordinates[0] + ', depth: ' +  coordinates[2] + ']' + "</p>").addTo(myMap);
+            "<br>" + '[lat: ' + coordinates[1] + ", lng: " + coordinates[0] + ", depth: " + coordinates[2] + "]" + "</p>").addTo(myMap);
     };
 
-    // // Legend for the chart
-    // var legend = L.control({ position: 'bottomright' });
-    // legend.onAdd = function () {
+    // Colors for legend
+    function getColor2(legendColor) {
+        return legendColor === "<5" ? "#b3e5fc" :
+        legendColor === "5-10" ? "#4fc3f7" :
+        legendColor === "10-15" ? "#03a9f4" :
+        legendColor === "15-20" ? "0288d1" :
+        legendColor === "20-25" ? "01579b" :
+        legendColor === "25+" ? "#023762" : "023762";
+    }
 
-    //     var div = L.DomUtil.create('div', 'info legend'),
-    //         grades = [0, 1, 2, 3, 4, 5],
-    //         labels = [];
+    // Create legend object
+    var legend = L.control({
+        position: "topright"
+    });
 
-    //     // loop through our magnitude intervals and generate a label with a colored square for each interval
-    //     for (var i = 0; i < grades.length; i++) {
-    //         div.innerHTML +=
-    //             '<i style="background:' + getColor(grades[i]) + '"></i> ' +
-    //             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    //     }
-    //     return div;
-    // };
-    // legend.addTo(myMap);
+    // Add legend details
+    legend.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var depth = ["<5", "5-10", "10-15", "15-20", "20-25", "25+"];
+        var labels = ["<b>Depth (m)</b>"];
+
+        console.log(depth);
+
+        // loop through magnitude intervals and generate a label with a colored square 
+        for (var i = 0; i < depth.length; i++) {
+            div.innerHTML +=
+                labels.push(
+                    '<i style="background:' + getColor(depth[i] + 1) + '"></i> ' +
+                    (depth[i] ? depth[i] : '+'));
+        }
+
+        div.innerHTML = labels.join('<br>');
+        return div;
+    };
+
+    // Add legend to map
+    legend.addTo(myMap);
 });
