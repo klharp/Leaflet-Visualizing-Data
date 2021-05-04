@@ -56,8 +56,8 @@ var layers = {
 
 // Create map object
 var myMap = L.map("map", {
-    center: [40.5, -99.5],
-    zoom: 5,
+    center: [30.5, -50.5],
+    zoom: 3,
     layers: [layers.earthquakes, layers.tectonicplates]
 });
 
@@ -106,7 +106,7 @@ d3.json(platesUrl).then(function(tectonics) {
 
 
 // Perform a GET request to queryUrl for the earthquake data
-d3.json(queryUrl).then(function (data) {
+d3.json(queryUrl).then(function(data) {
 
     // Function to color cicles according to depth
     function getColor(colors) {
@@ -137,7 +137,7 @@ d3.json(queryUrl).then(function (data) {
             radius: magnitudes * 15000
         }).bindPopup("<h3>" + features[i].properties.place +
             "</h3><hr><p>" + new Date(features[i].properties.time) +
-            "<br>" + '[lat: ' + coordinates[1] + ", lng: " + coordinates[0] + ", depth: " + coordinates[2] + "]" + "</p>").addTo(myMap);
+            "<br>" + '[lat: ' + coordinates[1] + ", lng: " + coordinates[0] + ", depth: " + coordinates[2] + "]" + "</p>").addTo(layers.earthquakes);
     }
 
     // Colors for legend
@@ -179,6 +179,6 @@ d3.json(queryUrl).then(function (data) {
     }
 
     //Add legend to map
-    legend.addTo(myMap);
+    legend.addTo(layers.earthquakes);
 });
 
