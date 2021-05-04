@@ -18,6 +18,9 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
 
 // Store API endpoint
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
+
+console.log(platesUrl);
 
 // Perform a GET request to the query URL
 d3.json(queryUrl).then(function (data) {
@@ -95,3 +98,52 @@ d3.json(queryUrl).then(function (data) {
     //Add legend to map
     legend.addTo(myMap);
 });
+
+// Add layer control
+// Create basemap object
+var grayscale = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "light-v10",
+    accessToken: API_KEY
+});
+
+var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "satellite-v9",
+    accessToken: API_KEY
+});
+
+var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "outdoors-v11",
+    accessToken: API_KEY
+});
+
+// Create basemap object
+var baseMaps = {
+    "grayscale": grayscale,
+    "satellite": satellite,
+    "outdoors": outdoors,
+  };
+
+  // Initialize layer groups
+  // need correct names
+  var layers = {
+    EARTHQUAKES: new L.LayerGroup(),
+    TECTONIC_LINE: new L.LayerGroup()
+  };
+  
+  // Create overlay object to add to layer control
+  var overlayMaps = {
+    "EarthQuakes": layers.EARTHQUAKES,
+    "Faultlines": layers.TECTONIC_LINE
+  };
+  
+  // Add layer control to map
+  // Null to hide the baseMap
+  L.control.layers(baseMaps, overlayMaps, {
+    //collapsed:false
+  }).addTo(myMap);
