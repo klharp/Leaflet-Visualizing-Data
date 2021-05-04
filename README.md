@@ -1,10 +1,14 @@
 # Leaflet Homework - Visualizing Data with Leaflet
 
-### Level 1: Basic Visualization
+Did provide a link to GitHub pages due to needing an API key for the mapping. API key is stored in a config.js file and was not pushed to GitHub.
+
+- - -
+
+## Level 1: Basic Visualization
 
 ![2-BasicMap](Images/2-BasicMap.png)
 
-## Visualize the Earthquake Data Set.
+### Visualize the Earthquake Data Set.
 
 1. **Get  data set**
 
@@ -14,17 +18,19 @@
 
 2. **Import & Visualize the Data**
 
+![3-Data](Images/2-BasicMapZooom.png)
+
    Created a map using Leaflet that plots all of the earthquakes from the data set based on the longitude and latitude.
 
-   * The data markers  reflect the magnitude of the earthquake by their size and the depth of the earthquake by color. 
+   * The data markers reflect the magnitude of the earthquake by their size and the depth of the earthquake by their color. 
 
    * Included are popups that provide additional information about the earthquake when a marker is clicked.
 
-   * Created a legend that will provide context for the map data.
+   * Created a legend that provides context for the map data.
 
 - - -
 
-### Level 2: More Data (Optional)
+## Level 2: More Data (Optional)
 
 ![Advanced](Images/step2-1.png)
 
@@ -32,12 +38,11 @@
 
 ![Advanced](Images/step2-3.png)
 
-Pulled in a second data set and visualized it along side  original set of data. Data on tectonic plates was found at <https://github.com/fraxen/tectonicplates>.
+Pulled in a second data set and visualized it along with original set of data (Step 1). Data on tectonic plates was provided at <https://github.com/fraxen/tectonicplates>.
 
+* Plotted a second data set to the map.
 
-* Plotted a second data set the map (<https://github.com/fraxen/tectonicplates>).
-
-* Configured three base maps to choose from as well as two different data sets into overlays that can be turned on and off independently.
+* Configured three base maps to choose from as well as two different data sets as overlays that can be turned on and off independently.
 
 * Added layer controls to the map.
 
