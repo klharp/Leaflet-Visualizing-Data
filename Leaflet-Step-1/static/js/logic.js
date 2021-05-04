@@ -8,7 +8,7 @@ var myMap = L.map("map", {
     zoom: 4
 });
 
-// Adding light mode tile layer to the map
+// Define tile layer and add to the map
 L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -16,41 +16,41 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
     accessToken: API_KEY
 }).addTo(myMap);
 
-// Store API endpoint 
+// Store API endpoint
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
-// Grab the data with d3
+// Perform a GET request to the query URL
 d3.json(queryUrl).then(function (data) {
 
-    // Create function to color cicles according to earthquake magnitudes
+    // Function to color cicles according to magnitudes
     function getColor(colors) {
-        return colors >= 5 ? "red" :
-        colors >= 4 ? "orange" :
-        colors >= 3 ? "yellow" :
-        colors >= 2 ? "green" :
-        colors >= 1 ? "blue" : "purple";
+        return colors >= 20 ? "#01579b" :
+        colors >= 15 ? "#0288d1" :
+        colors >= 10 ? "#03a9f4" :
+        colors >= 5 ? "#4fc3f7" :
+        colors >= 1 ? "#b3e5fc" : "#b3e5fc";
     }
 
-    // Grab the features data
+    // Loop through data and grab the features data
     var features = data.features;
 
     for (var i = 0; i < features.length; i++) {
 
-        //Define variable magnitudes and coordinates of the earthquakes
+        //Variables for magnitudes and coordinates 
         var magnitudes = features[i].properties.mag;
         var coordinates = features[i].geometry.coordinates;
 
         // Add circles to map
         L.circle(
             [coordinates[1], coordinates[0]], {
-            fillOpacity: 0.5,
-            fillColor: getColor(magnitudes),
-            color: "black",
+            fillOpacity: 1,
+            fillColor: getColor(coordinates[2]),
+            color: "white",
             weight: 0.5,
-            radius: magnitudes * 15000
+            radius: magnitudes * 10000
         }).bindPopup("<h3>" + features[i].properties.place +
             "</h3><hr><p>" + new Date(features[i].properties.time) +
-            '<br>' + '[' + coordinates[1] + ', ' + coordinates[0] + ']' + "</p>").addTo(myMap);
+            '<br>' + '[lat: ' + coordinates[1] + ', lng: ' + coordinates[0] + ', depth: ' +  coordinates[2] + ']' + "</p>").addTo(myMap);
     };
 
     // // Legend for the chart
