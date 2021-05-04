@@ -179,6 +179,6 @@ d3.json(queryUrl).then(function(data) {
     }
 
     //Add legend to map
-    legend.addTo(layers.earthquakes);
+    legend.addTo(myMap);
 });
 
