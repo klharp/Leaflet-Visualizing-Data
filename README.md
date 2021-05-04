@@ -1,6 +1,6 @@
 # Leaflet Homework - Visualizing Data with Leaflet
 
-Did provide a link to GitHub pages due to needing an API key for the mapping. API key is stored in a config.js file and was not pushed to GitHub.
+Did not provide a link to GitHub pages due to needing an API key for the mapping. API key is stored in a config.js file and was not pushed to GitHub.
 
 - - -
 
@@ -12,13 +12,13 @@ Did provide a link to GitHub pages due to needing an API key for the mapping. AP
 
 1. **Get  data set**
 
-   The USGS provides earthquake data in a number of different formats, updated every 5 minutes ([USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ). The URL of the chosen JSON pulls in the data for the visualization.
+   The USGS provides earthquake data in a number of different formats, updated every 5 minutes ([USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ). The URL of the chosen JSON pulls in the data for the visualization. Used the data set that records monthly earthquake activity.
 
   ![3-Data](Images/3-Data.png)
 
 2. **Import & Visualize the Data**
 
-![3-Data](Images/2-BasicMapZooom.png)
+![3-Data](Images/2-BasicMapZoom.png)
 
    Created a map using Leaflet that plots all of the earthquakes from the data set based on the longitude and latitude.
 
