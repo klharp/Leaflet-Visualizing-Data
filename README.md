@@ -1,5 +1,15 @@
 # Leaflet Homework - Visualizing Data with Leaflet
 
+## Project Overview
+This project focused on visualizing and mapping earthquake data provided by the United States Geological Survey.
+
+Languages and libraries used:
+
+* Javascript
+* Leaflet
+* HTML
+* CSS
+
 Did not provide a link to GitHub pages due to needing an API key for the mapping. API key is stored in a config.js file and was not pushed to GitHub.
 
 - - -
