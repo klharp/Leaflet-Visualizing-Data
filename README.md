@@ -7,6 +7,7 @@ Languages and libraries used:
 
 * Javascript
 * Leaflet
+* D3
 * HTML
 * CSS
 
