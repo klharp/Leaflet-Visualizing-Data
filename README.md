@@ -1,4 +1,4 @@
-# Leaflet Homework - Visualizing Data with Leaflet
+# Visualizing Data with Leaflet
 
 ## Project Overview
 This project focused on visualizing and mapping earthquake data provided by the United States Geological Survey.
